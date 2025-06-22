@@ -10,7 +10,8 @@ class AppColors {
     1,
   ); // Azul personalizado
   static const Color primary100 = Color.fromRGBO(13, 110, 253, 1);
-  static const Color texy100 = Color.fromRGBO(128, 128, 128, 1);
+  static const Color text100 = Color.fromRGBO(128, 128, 128, 1);
+  static const Color text50 = Color.fromRGBO(236, 236, 236, 0.7);
   static const Color text500 = Color.fromRGBO(33, 37, 41, 1);
   static const Color secondary300 = Color.fromRGBO(159, 195, 76, 1);
   static const Color secondary500 = Color.fromRGBO(151, 192, 31, 1);

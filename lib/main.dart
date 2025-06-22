@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/homeScreen.dart';
 import 'screens/profileScreen.dart';
 import 'screens/loginScreen.dart';
+import 'screens/scheduleScreen.dart';
 import 'widgets/customNavbar.dart';
 
 void main() => runApp(MyApp());
@@ -31,7 +32,11 @@ class _MainPageState extends State<MainPage> {
 
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [HomeScreen(), ProfileScreen()];
+  final List<Widget> _screens = [
+    HomeScreen(),
+    ScheduleScreen(),
+    ProfileScreen(),
+  ];
 
   void _onTabTapped(int index) {
     setState(() => _selectedIndex = index);
@@ -39,7 +44,6 @@ class _MainPageState extends State<MainPage> {
 
   // Función para iniciar sesión
   void _handleLoginSuccess() {
-    
     setState(() {
       _isLoggedIn = true;
     });
