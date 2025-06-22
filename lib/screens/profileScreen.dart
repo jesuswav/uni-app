@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import '../core/theme.dart';
+import 'package:flutter/services.dart';
+// Provider
+import 'package:provider/provider.dart';
+import '../provider/appState.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final email = Provider.of<AppState>(
+      context,
+    ).email; // 👈 leer dato compartido
+
+    final String name = 'Jaime';
+    final String firstLetter = name.substring(0, 1);
+    final String registration = 'C3342452';
+
+    print(email);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -24,12 +39,111 @@ class ProfileScreen extends StatelessWidget {
 
               SizedBox(height: 34),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 0,
+              SizedBox(
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 252,
+                      height: 252,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.text50,
+                        shape: BoxShape.circle,
+                      ),
+                      padding: EdgeInsets.all(42),
+                      child: Text(
+                        firstLetter,
+                        style: TextStyle(fontSize: 100),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
                 ),
-                child: Text('Contenido del profile'),
+              ),
+
+              SizedBox(height: 32),
+
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: AppColors.text50,
+                        borderRadius: BorderRadius.circular(22),
+                      ),
+                      padding: EdgeInsets.all(18),
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                'Matricula',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(registration),
+                            ],
+                          ),
+
+                          Spacer(),
+
+                          Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Clipboard.setData(
+                                    ClipboardData(text: registration),
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.check_circle,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(width: 8),
+                                          Text(
+                                            "Matricula copiada al portapapeles.",
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ],
+                                      ),
+                                      backgroundColor: Colors.green.shade600,
+                                      duration: Duration(seconds: 2),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      behavior: SnackBarBehavior
+                                          .floating, // 👈 Aparece flotando
+                                      margin: EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 12,
+                                      ),
+                                      elevation: 6,
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'Copiar',
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

@@ -5,9 +5,18 @@ import 'screens/loginScreen.dart';
 import 'screens/scheduleScreen.dart';
 import 'widgets/customNavbar.dart';
 
-void main() => runApp(MyApp());
+// Provider
+// ignore: depend_on_referenced_packages
+import 'package:provider/provider.dart';
+import 'provider/appState.dart';
+
+void main() {
+  runApp(ChangeNotifierProvider(create: (_) => AppState(), child: MyApp()));
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

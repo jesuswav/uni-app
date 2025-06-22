@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import '../core/theme.dart';
+// Provider
+// ignore: depend_on_referenced_packages
+import 'package:provider/provider.dart';
+import '../provider/appState.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback onLoginSuccess;
@@ -28,8 +32,10 @@ class _LoginScreenState extends State<LoginScreen> {
       Future.delayed(Duration(seconds: 2), () {
         setState(() => _isLoading = false);
 
-        print(_emailController.text);
-        print(_passwordController.text);
+        final email = _emailController.text;
+
+        // ✅ Guardar en el Provider
+        Provider.of<AppState>(context, listen: false).setEmail(email);
 
         // Simulación exitosa
         widget.onLoginSuccess();
