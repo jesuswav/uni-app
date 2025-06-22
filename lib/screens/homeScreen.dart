@@ -249,12 +249,13 @@ class HomeScreen extends StatelessWidget {
 
                                     SizedBox(height: 22),
 
-                                    Container(
+                                    SizedBox(
                                       width: double.infinity,
                                       child: Text(
                                         "Ver todas...",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
+                                          decoration: TextDecoration.underline,
                                         ),
                                         textAlign: TextAlign.right,
                                       ),
