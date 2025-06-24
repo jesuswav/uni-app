@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uni_app/core/theme.dart';
 import '../widgets/scheduleItem.dart';
+import '../screens/classScreen.dart';
 
 class Schedule {
   final String subject;
@@ -204,20 +205,53 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
               SizedBox(height: 16),
 
+              // Renderizar los elementos filtrados
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(12),
                     child: Column(
-                      children: filteredSchedules.map((schedule) {
-                        return ScheduleItem(
-                          subject: schedule.subject,
-                          teacher: schedule.teacher,
-                          startTime: schedule.startTime,
-                          finishTime: schedule.finishTime,
-                          day: schedule.day,
-                        );
-                      }).toList(),
+                      children: [
+                        AnimatedSwitcher(
+                          duration: Duration(milliseconds: 400),
+                          switchInCurve: Curves.easeOut,
+                          switchOutCurve: Curves.easeIn,
+                          transitionBuilder:
+                              (Widget child, Animation<double> animation) {
+                                return FadeTransition(
+                                  opacity: animation,
+                                  child: child,
+                                );
+                              },
+                          child: Column(
+                            key: ValueKey(
+                              selectedDay,
+                            ), // 👈 ¡clave para que funcione!
+                            children: filteredSchedules.map((schedule) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => ClassScreen(
+                                        nombreClase: schedule.subject,
+                                        horario: schedule.startTime,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: ScheduleItem(
+                                  subject: schedule.subject,
+                                  teacher: schedule.teacher,
+                                  startTime: schedule.startTime,
+                                  finishTime: schedule.finishTime,
+                                  day: schedule.day,
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uni_app/core/theme.dart';
+import '../screens/taskScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -199,52 +200,19 @@ class HomeScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Nombre de la tarea",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          " - ",
-                                          style: TextStyle(
-                                            color: Colors.grey[700],
-                                          ),
-                                        ),
-                                        Text(
-                                          "Nombre materia",
-                                          style: TextStyle(
-                                            color: Colors.grey[700],
-                                          ),
-                                        ),
-                                      ],
+                                    TaskItem(
+                                      subjectName: 'Integradora II',
+                                      taskTeacher: 'Mtro. López',
+                                      taskName: 'Investigación IoT',
                                     ),
 
                                     SizedBox(height: 4),
 
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Nombre de la tarea",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          " - ",
-                                          style: TextStyle(
-                                            color: Colors.grey[700],
-                                          ),
-                                        ),
-                                        Text(
-                                          "Nombre materia",
-                                          style: TextStyle(
-                                            color: Colors.grey[700],
-                                          ),
-                                        ),
-                                      ],
+                                    TaskItem(
+                                      subjectName: 'Integradora III',
+                                      taskTeacher: 'Mtro. López',
+                                      taskName:
+                                          'Investigación en el campo de la exoplanetancia',
                                     ),
 
                                     SizedBox(height: 22),
@@ -274,6 +242,65 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class TaskItem extends StatelessWidget {
+  const TaskItem({
+    required this.taskName,
+    required this.taskTeacher,
+    required this.subjectName,
+    super.key,
+  });
+
+  final String taskName;
+  final String taskTeacher;
+  final String subjectName;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => TaskScreen(
+              nombreTarea: taskName,
+              nombreProfesor: taskTeacher,
+              contenidoTarea: '''
+1. Introducción a la Inteligencia Artificial
+2. Historia cronológica:
+   - 1956: Dartmouth Conference
+   - 1980s: Expert systems
+   - 2010s: Deep Learning
+3. Aplicaciones actuales
+4. Conclusión
+
+*Este ensayo debe contener al menos 1000 palabras y ser entregado en PDF.*
+''',
+            ),
+          ),
+        );
+      },
+      child: Row(
+        children: [
+          Expanded(
+            // 👈 importante para que el texto se adapte
+            child: Text(
+              taskName,
+              softWrap: true,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Text(" - ", style: TextStyle(color: Colors.grey[700])),
+          Text(
+            subjectName,
+            softWrap: true,
+            style: TextStyle(color: Colors.grey[700]),
+          ),
+        ],
       ),
     );
   }
