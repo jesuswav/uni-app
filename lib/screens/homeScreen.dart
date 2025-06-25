@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uni_app/core/theme.dart';
 import '../screens/taskScreen.dart';
+import '../screens/pendingTaskScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -219,13 +220,25 @@ class HomeScreen extends StatelessWidget {
 
                                     SizedBox(
                                       width: double.infinity,
-                                      child: Text(
-                                        "Ver todas...",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          decoration: TextDecoration.underline,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) =>
+                                                  PendingTasksPage(),
+                                            ),
+                                          );
+                                        },
+                                        child: Text(
+                                          "Ver todas...",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                          textAlign: TextAlign.right,
                                         ),
-                                        textAlign: TextAlign.right,
                                       ),
                                     ),
                                   ],
