@@ -81,11 +81,18 @@ class HomeScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            "Calificaciones",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.school),
+                                              SizedBox(width: 8),
+                                              Text(
+                                                "Calificaciones",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           SizedBox(height: 4),
                                           Text(
@@ -122,11 +129,18 @@ class HomeScreen extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              "Título A",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.watch),
+                                                SizedBox(width: 8),
+                                                Text(
+                                                  "Horarios",
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                             SizedBox(height: 4),
                                             Text(

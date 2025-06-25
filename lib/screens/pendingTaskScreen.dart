@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uni_app/core/theme.dart';
 import '../widgets/pendingTaskItem.dart'; // Asegúrate de importar correctamente
 
 class Task {
@@ -50,7 +51,10 @@ class PendingTasksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tareas Pendientes')),
+      appBar: AppBar(
+        title: const Text('Tareas Pendientes'),
+        backgroundColor: AppColors.background,
+      ),
       body: ListView.builder(
         itemCount: tareasPendientes.length,
         itemBuilder: (context, index) {

@@ -1,5 +1,6 @@
 // screens/grades_page.dart
 import 'package:flutter/material.dart';
+import 'package:uni_app/core/theme.dart';
 import '../models/subjectNotes.dart';
 import '../widgets/subjectGradeItem.dart';
 
@@ -41,8 +42,7 @@ class GradesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Calificaciones'),
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.background,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

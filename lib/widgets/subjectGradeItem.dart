@@ -1,5 +1,6 @@
 // widgets/subject_grade_item.dart
 import 'package:flutter/material.dart';
+import 'package:uni_app/core/theme.dart';
 import '../models/subjectNotes.dart';
 
 class SubjectGradeItem extends StatefulWidget {
@@ -17,8 +18,9 @@ class _SubjectGradeItemState extends State<SubjectGradeItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: AppColors.text75,
       margin: const EdgeInsets.symmetric(vertical: 10),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       child: InkWell(
         onTap: () => setState(() => isExpanded = !isExpanded),
         borderRadius: BorderRadius.circular(12),
@@ -54,7 +56,7 @@ class _SubjectGradeItemState extends State<SubjectGradeItem> {
                         ? Icons.keyboard_arrow_up
                         : Icons.keyboard_arrow_down,
                     size: 28,
-                    color: Colors.grey[600],
+                    color: AppColors.text100,
                   ),
                 ],
               ),
