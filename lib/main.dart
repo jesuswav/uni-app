@@ -4,13 +4,21 @@ import 'screens/profileScreen.dart';
 import 'screens/loginScreen.dart';
 import 'screens/scheduleScreen.dart';
 import 'widgets/customNavbar.dart';
+import './core/theme.dart';
 
 // Provider
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 import 'provider/appState.dart';
 
-void main() {
+// guardar la sesión
+import './models/sesionUsuario.dart';
+import 'package:uni_app/services/sessionService.dart';
+
+void main() async {
+  // iniciar Shared_references
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(ChangeNotifierProvider(create: (_) => AppState(), child: MyApp()));
 }
 
@@ -37,9 +45,18 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  bool _isLoggedIn = false; // 👈 Simulación de sesión
+  bool? _isLoggedIn; // 👈 Simulación de sesión
+  String _emailFromChild = '';
 
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 1, milliseconds: 500), () {
+      _verificarSesion();
+    });
+  }
 
   final List<Widget> _screens = [
     HomeScreen(),
@@ -51,22 +68,67 @@ class _MainPageState extends State<MainPage> {
     setState(() => _selectedIndex = index);
   }
 
-  // Función para iniciar sesión
-  void _handleLoginSuccess() {
+  // Función para guardar la sesión
+  Future<void> _handleLoginSuccess() async {
+    // datos para el usuario
+    final usuario = UserSession(
+      email: _emailFromChild,
+      //nombre: 'Juan Pérez',
+      isLoggedIn: true,
+    );
+    // guardar la sesión por medio del servicio
+    await SessionService.guardarSesion(usuario);
+
+    // Obtener sesión
+    final session = await SessionService.obtenerSesion();
+    // guardar la sesion en el objeto que se evalua para renderizar  o no el login
     setState(() {
-      _isLoggedIn = true;
+      _isLoggedIn = session?.isLoggedIn;
+    });
+  }
+
+  Future<void> _verificarSesion() async {
+    // Obtener sesión
+    final session = await SessionService.obtenerSesion();
+    // guardar la sesion en el objeto que se evalua para renderizar  o no el login
+    setState(() {
+      _isLoggedIn = session?.isLoggedIn;
+    });
+  }
+
+  void updateEmailFromChild(String nuevo) {
+    setState(() {
+      _emailFromChild = nuevo;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     // 👇 Mostrar Login si no ha iniciado sesión
-    if (!_isLoggedIn) {
-      return LoginScreen(onLoginSuccess: _handleLoginSuccess);
+    // 🟡 Mostrar loader mientras se verifica
+    if (_isLoggedIn == null) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary500),
+            backgroundColor: Colors.white38,
+            strokeWidth: 6.0,
+          ),
+        ),
+      );
     }
 
+    // 🔴 Mostrar Login solo si NO hay sesión activa
+    if (_isLoggedIn == false) {
+      return LoginScreen(
+        onLoginSuccess: _handleLoginSuccess,
+        updateEmailFromChild: updateEmailFromChild,
+      );
+    }
+
+    // ✅ Mostrar app normalmente
     return Scaffold(
-      body: _screens[_selectedIndex], // Cambia pantalla
+      body: _screens[_selectedIndex],
       bottomNavigationBar: CustomNavBar(
         selectedIndex: _selectedIndex,
         onTap: _onTabTapped,

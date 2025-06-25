@@ -7,8 +7,13 @@ import '../provider/appState.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback onLoginSuccess;
+  final void Function(String) updateEmailFromChild;
 
-  const LoginScreen({required this.onLoginSuccess, super.key});
+  const LoginScreen({
+    required this.onLoginSuccess,
+    required this.updateEmailFromChild,
+    super.key,
+  });
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -38,6 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Provider.of<AppState>(context, listen: false).setEmail(email);
 
         // Simulación exitosa
+        widget.updateEmailFromChild(_emailController.text);
         widget.onLoginSuccess();
       });
     }

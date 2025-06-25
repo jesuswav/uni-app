@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import '../core/theme.dart';
 import 'package:flutter/services.dart';
+import '../main.dart';
 // Provider
+// ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 import '../provider/appState.dart';
+// Manejar la sesión
+import 'package:shared_preferences/shared_preferences.dart';
+import '../services/sessionService.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -18,7 +23,18 @@ class ProfileScreen extends StatelessWidget {
     final String firstLetter = name.substring(0, 1);
     final String registration = 'C3342452';
 
-    print(email);
+    Future<void> cerrarSesion() async {
+      // Cerrar sesión
+      await SessionService.borrarSesion();
+
+      if (context.mounted) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const MainPage()),
+          (route) => false,
+        );
+      }
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -74,6 +90,13 @@ class ProfileScreen extends StatelessWidget {
                 title: 'Matricula',
                 content: registration,
                 message: 'Matricula copiada',
+              ),
+
+              SizedBox(height: 30),
+
+              TextButton(
+                onPressed: cerrarSesion,
+                child: const Text('Cerrar sesión'),
               ),
             ],
           ),
