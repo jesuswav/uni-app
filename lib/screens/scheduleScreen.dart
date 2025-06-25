@@ -8,6 +8,9 @@ class Schedule {
   final String teacher;
   final String startTime;
   final String finishTime;
+  final String quarter;
+  final int credits;
+  final String description;
   final String day;
 
   Schedule({
@@ -15,6 +18,9 @@ class Schedule {
     required this.teacher,
     required this.startTime,
     required this.finishTime,
+    required this.quarter,
+    required this.credits,
+    required this.description,
     required this.day,
   });
 }
@@ -26,14 +32,22 @@ final List<Schedule> semanalSchedule = [
     teacher: 'Mtra. López',
     startTime: '08:00am',
     finishTime: '09:00am',
+    quarter: '5to',
     day: 'Lunes',
+    credits: 8,
+    description:
+        'Curso orientado a estructuras de datos avanzadas y paradigmas modernos.',
   ),
   Schedule(
     subject: 'Español',
     teacher: 'Mtro. Pérez',
     startTime: '09:10am',
     finishTime: '10:10am',
+    quarter: '5to',
     day: 'Lunes',
+    credits: 8,
+    description:
+        'Curso orientado a estructuras de datos avanzadas y paradigmas modernos.',
   ),
 
   // Martes
@@ -42,14 +56,22 @@ final List<Schedule> semanalSchedule = [
     teacher: 'Mtra. Gómez',
     startTime: '08:00am',
     finishTime: '09:00am',
+    quarter: '5to',
     day: 'Martes',
+    credits: 8,
+    description:
+        'Curso orientado a estructuras de datos avanzadas y paradigmas modernos.',
   ),
   Schedule(
     subject: 'Historia',
     teacher: 'Mtro. Herrera',
     startTime: '09:10am',
     finishTime: '10:10am',
+    quarter: '5to',
     day: 'Martes',
+    credits: 8,
+    description:
+        'Curso orientado a estructuras de datos avanzadas y paradigmas modernos.',
   ),
 
   // Miércoles
@@ -58,14 +80,22 @@ final List<Schedule> semanalSchedule = [
     teacher: 'Mtra. Romero',
     startTime: '08:00am',
     finishTime: '09:00am',
+    quarter: '5to',
     day: 'Miércoles',
+    credits: 8,
+    description:
+        'Curso orientado a estructuras de datos avanzadas y paradigmas modernos.',
   ),
   Schedule(
     subject: 'Educación Física',
     teacher: 'Profr. Silva',
     startTime: '09:10am',
     finishTime: '10:10am',
+    quarter: '5to',
     day: 'Miércoles',
+    credits: 8,
+    description:
+        'Curso orientado a estructuras de datos avanzadas y paradigmas modernos.',
   ),
 
   // Jueves
@@ -74,14 +104,22 @@ final List<Schedule> semanalSchedule = [
     teacher: 'Miss Clark',
     startTime: '08:00am',
     finishTime: '09:00am',
+    quarter: '5to',
     day: 'Jueves',
+    credits: 8,
+    description:
+        'Curso orientado a estructuras de datos avanzadas y paradigmas modernos.',
   ),
   Schedule(
     subject: 'Computación',
     teacher: 'Ing. Torres',
     startTime: '09:10am',
     finishTime: '10:10am',
+    quarter: '5to',
     day: 'Jueves',
+    credits: 8,
+    description:
+        'Curso orientado a estructuras de datos avanzadas y paradigmas modernos.',
   ),
 
   // Viernes
@@ -90,14 +128,22 @@ final List<Schedule> semanalSchedule = [
     teacher: 'Mtra. López',
     startTime: '08:00am',
     finishTime: '09:00am',
+    quarter: '5to',
     day: 'Viernes',
+    credits: 8,
+    description:
+        'Curso orientado a estructuras de datos avanzadas y paradigmas modernos.',
   ),
   Schedule(
     subject: 'Arte',
     teacher: 'Mtro. Díaz',
     startTime: '09:10am',
     finishTime: '10:10am',
+    quarter: '5to',
     day: 'Viernes',
+    credits: 8,
+    description:
+        'Curso orientado a estructuras de datos avanzadas y paradigmas modernos.',
   ),
 ];
 
@@ -234,8 +280,15 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (_) => ClassScreen(
-                                        nombreClase: schedule.subject,
-                                        horario: schedule.startTime,
+                                        subject: Subject(
+                                          nombre: schedule.subject,
+                                          profesor: schedule.teacher,
+                                          startTime: schedule.startTime,
+                                          finishTime: schedule.finishTime,
+                                          cuatrimestre: schedule.quarter,
+                                          creditos: schedule.credits,
+                                          descripcion: schedule.description,
+                                        ),
                                       ),
                                     ),
                                   );

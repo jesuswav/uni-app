@@ -7,18 +7,33 @@ import '../main.dart';
 import 'package:provider/provider.dart';
 import '../provider/appState.dart';
 // Manejar la sesión
-import 'package:shared_preferences/shared_preferences.dart';
 import '../services/sessionService.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final email = Provider.of<AppState>(
-      context,
-    ).email; // 👈 leer dato compartido
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
 
+class _ProfileScreenState extends State<ProfileScreen> {
+  String userEmail = '';
+
+  Future<void> cargarSesion() async {
+    final sesion = await SessionService.obtenerSesion();
+    setState(() {
+      userEmail = sesion!.email;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    cargarSesion();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final String name = 'Jaime';
     final String firstLetter = name.substring(0, 1);
     final String registration = 'C3342452';
@@ -83,7 +98,7 @@ class ProfileScreen extends StatelessWidget {
 
               ProfileItem(
                 title: 'Correo Institucional',
-                content: email,
+                content: userEmail,
                 message: 'Correo copiado',
               ),
               ProfileItem(

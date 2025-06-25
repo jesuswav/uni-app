@@ -19,6 +19,7 @@ class TaskScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Entregar Tarea'),
         centerTitle: true,
+        backgroundColor: AppColors.background,
         //backgroundColor: Colors.deepPurple,
       ),
       body: SafeArea(

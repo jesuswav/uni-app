@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uni_app/core/theme.dart';
 import '../screens/taskScreen.dart';
 import '../screens/pendingTaskScreen.dart';
+import '../screens/gradesScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -54,6 +55,53 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
+                                // Columna derecha: un solo elemento que ocupa las dos filas
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => GradesScreen(),
+                                      ),
+                                    );
+                                  },
+
+                                  child: Expanded(
+                                    // Primer bloque
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 32,
+                                        horizontal: 22,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.text50,
+                                        borderRadius: BorderRadius.circular(22),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Calificaciones",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(height: 4),
+                                          Text(
+                                            "Todas tus calificaciones en un mismo lugar.",
+                                            style: TextStyle(
+                                              color: Colors.grey[700],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                SizedBox(height: 12),
+
                                 // Columna izquierda: dos elementos uno arriba del otro
                                 Row(
                                   children: [
@@ -127,42 +175,6 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ],
-                                ),
-
-                                SizedBox(height: 12),
-
-                                // Columna derecha: un solo elemento que ocupa las dos filas
-                                Expanded(
-                                  // Primer bloque
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 32,
-                                      horizontal: 22,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.text50,
-                                      borderRadius: BorderRadius.circular(22),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Título A",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        SizedBox(height: 4),
-                                        Text(
-                                          "Subtítulo A",
-                                          style: TextStyle(
-                                            color: Colors.grey[700],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
                                 ),
                               ],
                             ),
