@@ -110,6 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
           duration: Duration(milliseconds: 500),
           child: Text(_isRegistered ? "Iniciar sesión" : 'Registrarse'),
         ),
+        backgroundColor: AppColors.background,
       ),
       body: AnimatedOpacity(
         opacity: opacityLevel,

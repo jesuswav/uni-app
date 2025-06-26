@@ -25,7 +25,7 @@ class _SubjectGradeItemState extends State<SubjectGradeItem> {
         onTap: () => setState(() => isExpanded = !isExpanded),
         borderRadius: BorderRadius.circular(12),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(22),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -34,23 +34,32 @@ class _SubjectGradeItemState extends State<SubjectGradeItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Nombre de la materia y profesor
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      Text(
-                        widget.subjectNotes.subject,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        widget.subjectNotes.teacher,
-                        style: TextStyle(color: Colors.grey[700]),
+                      Icon(Icons.class_, size: 38, color: AppColors.text100),
+
+                      SizedBox(width: 12),
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.subjectNotes.subject,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            widget.subjectNotes.teacher,
+                            style: TextStyle(color: Colors.grey[700]),
+                          ),
+                        ],
                       ),
                     ],
                   ),
+
                   Icon(
                     isExpanded
                         ? Icons.keyboard_arrow_up

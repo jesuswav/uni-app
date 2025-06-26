@@ -56,7 +56,9 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    print('verificando1');
     Future.delayed(Duration(seconds: 1, milliseconds: 500), () {
+      print('verificando.....');
       _verificarSesion();
     });
   }
@@ -82,21 +84,42 @@ class _MainPageState extends State<MainPage> {
     // guardar la sesión por medio del servicio
     await SessionService.guardarSesion(usuario);
 
+    print('verificando2');
+
     // Obtener sesión
     final session = await SessionService.obtenerSesion();
-    // guardar la sesion en el objeto que se evalua para renderizar  o no el login
-    setState(() {
-      _isLoggedIn = session?.isLoggedIn;
-    });
+    if (session != null) {
+      print(session.email);
+      // guardar la sesion en el objeto que se evalua para renderizar  o no el login
+      setState(() {
+        _isLoggedIn = session.isLoggedIn;
+      });
+    } else {
+      print('esto no esta funcionando');
+      setState(() {
+        _isLoggedIn = false;
+      });
+    }
+
+    print(_isLoggedIn);
   }
 
   Future<void> _verificarSesion() async {
     // Obtener sesión
     final session = await SessionService.obtenerSesion();
     // guardar la sesion en el objeto que se evalua para renderizar  o no el login
-    setState(() {
-      _isLoggedIn = session?.isLoggedIn;
-    });
+    if (session != null) {
+      print(session.email);
+      // guardar la sesion en el objeto que se evalua para renderizar  o no el login
+      setState(() {
+        _isLoggedIn = session.isLoggedIn;
+      });
+    } else {
+      print('esto no esta funcionando');
+      setState(() {
+        _isLoggedIn = false;
+      });
+    }
   }
 
   void updateEmailFromChild(String nuevo) {

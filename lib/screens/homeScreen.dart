@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uni_app/core/theme.dart';
+import 'package:uni_app/screens/scheduleScreen.dart';
 import '../screens/taskScreen.dart';
 import '../screens/pendingTaskScreen.dart';
 import '../screens/gradesScreen.dart';
@@ -112,47 +113,60 @@ class HomeScreen extends StatelessWidget {
                                 // Columna izquierda: dos elementos uno arriba del otro
                                 Row(
                                   children: [
-                                    Expanded(
-                                      // Primer bloque
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 32,
-                                          horizontal: 22,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.text50,
-                                          borderRadius: BorderRadius.circular(
-                                            22,
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => ScheduleScreen(),
                                           ),
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Icon(Icons.watch),
-                                                SizedBox(width: 8),
-                                                Text(
-                                                  "Horarios",
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
+                                        );
+                                      },
+                                      child: Expanded(
+                                        // Primer bloque
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                            vertical: 32,
+                                            horizontal: 22,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.text50,
+                                            borderRadius: BorderRadius.circular(
+                                              22,
+                                            ),
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(Icons.schedule),
+                                                  SizedBox(width: 8),
+                                                  Text(
+                                                    "Horarios",
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 4),
-                                            Text(
-                                              "Subtítulo A",
-                                              style: TextStyle(
-                                                color: Colors.grey[700],
+                                                ],
                                               ),
-                                            ),
-                                          ],
+                                              SizedBox(height: 4),
+                                              Text(
+                                                "Consulta tu horarios.",
+                                                softWrap: true,
+                                                style: TextStyle(
+                                                  color: Colors.grey[700],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
+
                                     SizedBox(width: 12),
                                     Expanded(
                                       // Primer bloque
